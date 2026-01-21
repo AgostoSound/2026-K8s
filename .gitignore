@@ -3,4 +3,3 @@
 config/
 .env
 api/migrations
-api/models/_pycache_/
