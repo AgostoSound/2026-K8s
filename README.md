@@ -201,15 +201,3 @@ docker compose down -v
 - Production-like environment simulation
 
 ---
-
-## 👤 Author
-
-**Augusto**  
-Software Developer  
-Amsterdam / NL
-
----
-
-## 📄 License
-
-MIT
