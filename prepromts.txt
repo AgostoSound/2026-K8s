@@ -1,0 +1,120 @@
+PROJECT: Kubernetes (local) + Docker + Django API + PostgreSQL
+OWNER: Augusto Pampaluna
+LOCATION: Netherlands (Amsterdam) | Job search focus: Backend Python roles (NL/remote)
+SOURCE OF TRUTH: CV file already uploaded to project (do not invent skills/experience beyond it)
+
+1) PURPOSE (WHY)
+Build real hands-on experience with Docker and Kubernetes from scratch, end-to-end:
+- A Django REST API backed by PostgreSQL
+- Containerized with Docker (Dockerfile + docker-compose)
+- Orchestrated locally with Kubernetes (kind or minikube)
+- Optional CI (GitHub Actions)
+Goal: be able to explain, run, debug, and demonstrate everything (repo + README). No “Kubernetes de cartón”.
+
+2) SCOPE (MVP)
+MVP API (pick a domain aligned with music/DJ or generic):
+- CRUD endpoints (e.g., tracks/artists/labels or bookmarks/notes)
+- Auth: optional (JWT preferred if time allows)
+- Admin + migrations
+- Tests: at least basic API tests
+
+Infrastructure:
+- Dockerfile for API + docker-compose (api + postgres)
+- Kubernetes manifests:
+  - Deployment + Service for API
+  - Deployment + Service for PostgreSQL (learning purpose)
+  - ConfigMap (non-secret settings)
+  - Secret (DB password, Django secret key)
+  - PVC for PostgreSQL persistence
+  - Ingress (NGINX) to expose the API locally
+- Operations:
+  - scale replicas
+  - rolling updates
+  - rollback
+  - basic debugging (logs/describe/exec)
+
+Out of scope (for now):
+- Paid cloud deployments
+- Managed DB in cloud
+- Complex microservices/event-driven architecture
+
+3) DEFINITION OF DONE (ACCEPTANCE CRITERIA)
+- “docker compose up” runs the stack and API responds successfully.
+- “kubectl apply -k …” (or apply -f) deploys API + DB on local cluster.
+- Ingress routes traffic to the API locally (e.g., http://api.local/health).
+- Can demonstrate:
+  - kubectl get pods/svc/ingress
+  - kubectl logs
+  - kubectl describe
+  - kubectl exec
+  - kubectl rollout status / undo
+  - kubectl scale
+- README contains:
+  - prerequisites
+  - one-command setup
+  - validation steps
+  - troubleshooting section
+
+4) DEFAULT TECH CHOICES (KEEP SIMPLE)
+- Framework: Django + Django REST Framework (DRF)
+- DB: PostgreSQL
+- Server: gunicorn
+- Container: Docker
+- Local K8s: choose ONE by default:
+  - Preferred: kind (runs on Docker, fast iteration)
+  - Alternative: minikube (if needed)
+- Ingress: NGINX Ingress Controller (local)
+
+5) WORKFLOW RULES (HOW THE ASSISTANT SHOULD RESPOND)
+For any task or stage, always output:
+- Objective
+- Steps
+- Commands (copy/paste-ready)
+- Validation (“expected output”)
+- Common errors + debug commands
+Constraints:
+- Prefer minimal viable solutions first, then improvements.
+- Avoid overengineering.
+- Keep naming consistent (api/db/dev).
+- Each stage ends with a commit-ready deliverable list.
+
+6) ROADMAP (STAGES)
+Stage 0 — Repo bootstrap
+- repo structure + initial README + env example
+
+Stage 1 — API
+- models + endpoints + migrations + basic tests
+Deliverable: working local run + tests
+
+Stage 2 — Docker
+- Dockerfile + docker-compose (api + postgres)
+Deliverable: docker compose up works + README instructions
+
+Stage 3 — Kubernetes core
+- manifests for api + db + config/secret + pvc
+Deliverable: kubectl apply works + pods healthy
+
+Stage 4 — Ingress + operations
+- ingress config, scaling, rollouts, rollback, debug drills
+Deliverable: exposed endpoint + demonstration commands
+
+Stage 5 — Optional CI
+- GitHub Actions: tests + build image (optional push)
+Deliverable: CI badge + pipeline runs
+
+7) CV CLAIMS POLICY (VERY IMPORTANT)
+Only include in CV what is demonstrable:
+- If Docker is used only for local dev: say “Containerized for local dev using Docker/docker-compose”.
+- Kubernetes: only after Stage 3/4. Mention “local cluster (kind/minikube)” explicitly.
+- Never claim production K8s experience if not done.
+
+After each completed stage, generate:
+- 2–3 CV bullets (honest, ATS-friendly)
+- 3–5 interview questions I should answer
+- a short “what I learned” summary for LinkedIn (optional)
+
+8) KEYWORDS (ATS)
+Docker, Dockerfile, docker-compose, containers
+Kubernetes, kubectl, Deployment, Service, Ingress, ConfigMap, Secret, PVC
+Django, DRF, PostgreSQL, migrations, gunicorn
+CI/CD, GitHub Actions (optional)
