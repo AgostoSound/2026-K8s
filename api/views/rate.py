@@ -1,7 +1,8 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework import viewsets
 from api.models import Rate
 from api.serializers import RateSerializer
 
-class RateViewSet(ModelViewSet):
-    queryset = Rate.objects.select_related("user", "product").all()
+
+class RateViewSet(viewsets.ModelViewSet):
     serializer_class = RateSerializer
+    queryset = Rate.objects.all().order_by("-id")  # <- SIN select_related

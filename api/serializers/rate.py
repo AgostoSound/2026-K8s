@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from api.models import Rate
 
+
 class RateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rate
-        fields = "__all__"
+        fields = ["id", "name", "amount", "currency", "is_active", "created_at"]
+        read_only_fields = ["id", "created_at"]

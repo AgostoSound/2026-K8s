@@ -1,3 +1,5 @@
+from .rate import RateSerializer
 from .product import ProductSerializer
 from .reservation import ReservationSerializer
-from .rate import RateSerializer
+
+__all__ = ["RateSerializer", "ProductSerializer", "ReservationSerializer"]

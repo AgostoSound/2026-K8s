@@ -1,16 +1,25 @@
 from django.conf import settings
 from django.db import models
+from .product import Product
 
-User = settings.AUTH_USER_MODEL
 
 class Reservation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reservations")
-    product = models.ForeignKey("Product", on_delete=models.PROTECT, related_name="reservations")
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="reservations",
+        null=True,
+        default=None
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.PROTECT,
+        related_name="reservations",
+        null=True
+    )
 
-    start_date = models.DateField()
-    end_date = models.DateField()
-
+    notes = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return f"{self.user} - {self.product}"
+        return f"Reservation #{self.id} - user={self.user_id} product={self.product_id}"

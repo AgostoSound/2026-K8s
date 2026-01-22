@@ -1,5 +1,28 @@
+
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*$py.class
+
+# Django
+*.log
+local_settings.py
+api/migrations
+
+# Envs
+.env
+.venv/
+venv/
+env/
+
+# OS/Editor
+.DS_Store
+.idea/
+.vscode/
 .idea
 .idea/
 config/
-.env
-api/migrations
+
+# SQLite (si no quieres trackearla)
+db.sqlite3
